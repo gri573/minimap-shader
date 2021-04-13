@@ -26,7 +26,7 @@ void main() {
 	gl_Position.z = 0.8 - (position.y + cameraPosition.y)/256.0;
 	if( eyeBrightness.y < 200) {
 		gl_Position.xy *= 2;
-		if(position.y > 5 || position.y < -15|| position.y + cameraPosition.y < 1) {
+		if(position.y > 2 || position.y < -25|| position.y + cameraPosition.y < 1) {
 			position.x = 1000.0;
 		}
 	}

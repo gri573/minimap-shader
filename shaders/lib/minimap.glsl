@@ -1,5 +1,5 @@
 float cursor(vec2 cursorCoord){
-	float iscursor = float(cursorCoord.y < 0.1 - 2.5 * abs(cursorCoord.x) && cursorCoord.y > -0.02 - 0.5 * abs(cursorCoord.x));
+	float iscursor = clamp(float(cursorCoord.y < 0.1 - 2.5 * abs(cursorCoord.x) && cursorCoord.y > -0.02 - 0.5 * abs(cursorCoord.x)) + 0.1*sign(cursorCoord.x) - 0.1, 0, 1);
 	return iscursor;
 }
 vec4 minimap(vec2 texCoord, sampler2D maptex, float rot) {
@@ -19,7 +19,7 @@ vec4 minimap(vec2 texCoord, sampler2D maptex, float rot) {
 	color.rgb = mix(color.rgb, vec3(0.9, 0.3, 0.1), cursor(rotPos));
 	#endif
 	float isborder = float((abs(texCoord.x) > 0.96 || abs(texCoord.y) > 0.96) && abs(texCoord.x) < 1.0 && abs(texCoord.y) < 1.0);
-	color.rgb = mix(color.rgb, vec3(0.3, 0.3, 0.1), isborder);
+	color.rgb = mix(color.rgb, vec3(0.3, 0.15, 0.1), isborder);
 	color.a = 1.0;
 	return color;
 }
