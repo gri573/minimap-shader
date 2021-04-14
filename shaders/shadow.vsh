@@ -1,7 +1,6 @@
 #version 120
 
 #include "/lib/settings.glsl"
-attribute vec4 mc_Entity;
 attribute vec2 mc_midTexCoord;
 
 varying vec2 lmcoord;
@@ -26,7 +25,7 @@ void main() {
 	gl_Position.z = 0.8 - (position.y + cameraPosition.y)/256.0;
 	if( eyeBrightness.y < 200) {
 		gl_Position.xy *= 2;
-		if(position.y > 2 || position.y < -25|| position.y + cameraPosition.y < 1) {
+		if(position.y > 2 || position.y < -25|| position.y + cameraPosition.y < 1 || gl_Normal.y < 0) {
 			position.x = 1000.0;
 		}
 	}
