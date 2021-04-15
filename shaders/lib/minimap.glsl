@@ -1,3 +1,4 @@
+uniform int shadowMapResolution;
 vec4 minimap(vec2 texCoord, sampler2D maptex, float rot) {
 	vec2 distAng = vec2(length(texCoord), 0.0);
 	distAng.y = acos(texCoord.x / distAng.x) * sign(sin(texCoord.y));
@@ -20,6 +21,8 @@ vec4 minimap(vec2 texCoord, sampler2D maptex, float rot) {
 	vec4 color = texture2D(maptex, 0.3 * texCoord + vec2(0.5));
 	color.rgb = mix(color.rgb, cursorcol, iscursor);
 	#endif
+	vec4 warncheck = texture2D(maptex, vec2(0.5/shadowMapResolution));
+	if(warncheck.r < 0.01 && warncheck.g < 0.01 && warncheck.b > 0.99) color = vec4(1.0, 0.0, 0.0, 1.0);
 	float isborder = float((abs(texCoord.x) > 0.96 || abs(texCoord.y) > 0.96) && abs(texCoord.x) < 1.0 && abs(texCoord.y) < 1.0);
 	color.rgb = mix(color.rgb, vec3(0.3, 0.15, 0.1), isborder);
 	color.a = 1.0;
