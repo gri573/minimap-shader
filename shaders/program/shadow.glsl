@@ -54,7 +54,7 @@ void main() {
 #ifdef VSH
 //Attributes//
 attribute vec2 mc_midTexCoord;
-attribute vec3 at_midBlock;
+attribute vec3 mc_Entity;
 
 //Uniforms//
 uniform int entityId;
@@ -82,6 +82,7 @@ void main() {
 	position = (shadowModelViewInverse * shadowProjectionInverse * gl_Position).xyz;
 	gl_Position.xy = position.xz * vec2(0.01, -0.01) * MM_ZOOM;
 	gl_Position.z = 0.99 - (position.y + cameraPosition.y)/256.0;
+	mat = mc_Entity.x - 10000;
 	if(entityId > 10000) {
 		gl_Position.z = clamp(gl_Position.z - 0.2, 0.01, cameraPosition.y);
 		position.y = clamp(position.y - 10, min(position.y, 0), 20);

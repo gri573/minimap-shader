@@ -8,6 +8,7 @@ uniform float aspectRatio;
 uniform sampler2D colortex0;
 uniform sampler2D shadowcolor0;
 uniform mat4 gbufferModelView;
+uniform float screenBrightness;
 
 //Optifine Constants//
 const vec4 shadowcolor0ClearColor = vec4(0.0, 0.0, 0.0, 1.0);
@@ -19,6 +20,7 @@ const vec4 shadowcolor0ClearColor = vec4(0.0, 0.0, 0.0, 1.0);
 //Program//
 void main() {
 	vec3 color = texture2D(colortex0, texcoord).rgb;
+	color = mix(color, pow(color, vec3(0.75)), screenBrightness);
 	#ifdef MINIMAP
 	if (hideGUI == 0) {
 		vec2 lookdir = normalize(gbufferModelView[0].xz + vec2(0.01, 0.0));
@@ -30,7 +32,6 @@ void main() {
 		}
 	}
 	#endif
-	
 /* DRAWBUFFERS:0 */
 	gl_FragData[0] = vec4(color, 1.0); //gcolor
 }
