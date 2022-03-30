@@ -1,4 +1,3 @@
-uniform int shadowMapResolution;
 vec4 minimap(vec2 texCoord, sampler2D maptex, float rot) {
 	vec2 distAng = vec2(length(texCoord), 0.0);
 	distAng.y = acos(texCoord.x / distAng.x) * sign(sin(texCoord.y));

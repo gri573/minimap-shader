@@ -6,11 +6,12 @@ varying vec4 color;
 #ifdef FSH
 //Uniforms//
 uniform sampler2D texture;
+uniform sampler2D lightmap;
 uniform vec4 entityColor;
 //Program//
 void main() {
-	vec4 color = texture2D(texture, texcoord) * color * max(lmcoord.y, lmcoord.x);
-	color.rgb *= vec3(1 + entityColor);
+	vec4 color = texture2D(texture, texcoord) * color * texture2D(lightmap, lmcoord);
+	color.rgb *= entityColor.rgb;
 	/*DRAWBUFFERS:0*/
 	gl_FragData[0] = color;
 }
