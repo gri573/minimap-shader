@@ -29,12 +29,14 @@ void main() {
 	vec4 color = vec4(0);
 	if (mat < 0.5) {
 		color = texture2D(texture, midtexcoord);
+		color.rgb *= color.a;
 		vec4 lm = texture2D(lightmap, lmcoord);
-		for (int i = 0; color.a < 0.1 && i < 4; i++) {
-			vec4 color0 = float(color.a < 0.1) * texture2D(texture, midtexcoord + 2 * offsets[i] / atlasSize);
+		for (int i = 0; i < 4; i++) {
+			vec4 color0 = texture2D(texture, midtexcoord + 2 * offsets[i] / atlasSize);
 			color.rgb += color0.rgb * color0.a;
 			color.a += color0.a;
 		}
+		color.rgb /= color.a;
 		if (color.a < 0.1){
 			color = texture2D(texture, texcoord);
 		}
@@ -98,7 +100,7 @@ void main() {
 	}
 	if (eyeBrightness.y < 200) {
 		gl_Position.xy *= 1.4;
-		if(position.y > 5 || position.y < -25|| position.y + cameraPosition.y < 1 || gl_Normal.y < 0) {
+		if(position.y > 5 || (position.y < -25 && position.y + cameraPosition.y < 63) || position.y + cameraPosition.y < 1 || gl_Normal.y < 0) {
 			position.x = 1000.0;
 		}
 	}
