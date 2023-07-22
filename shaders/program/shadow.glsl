@@ -90,7 +90,7 @@ void main() {
 	glcolor = gl_Color;
 	position = (shadowModelViewInverse * (gl_ModelViewMatrix * gl_Vertex)).xyz;
 	gl_Position.xy = position.xz * vec2(0.01, -0.01) * MM_ZOOM;
-	gl_Position.z = 0.99 - (position.y + cameraPosition.y)/256.0;
+	gl_Position.z = 0.7 - (position.y + cameraPosition.y)/1000.0;
 	gl_Position.w = 1.0;
 	if (abs(mc_Entity.x - 10003.0) < 0.5) mat = 3;
 	if(entityId > 10000) {
@@ -100,7 +100,7 @@ void main() {
 	}
 	if (eyeBrightness.y < 200) {
 		gl_Position.xy *= 1.4;
-		if(position.y > 5 || (position.y < -25 && position.y + cameraPosition.y < 63) || position.y + cameraPosition.y < 1 || gl_Normal.y < 0) {
+		if(position.y > 5 || (position.y < -25 && position.y + cameraPosition.y < 63) || gl_Normal.y < 0) {
 			position.x = 1000.0;
 		}
 	}
