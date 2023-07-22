@@ -20,7 +20,7 @@ const vec4 shadowcolor0ClearColor = vec4(0.0, 0.0, 0.0, 1.0);
 //Program//
 void main() {
 	vec3 color = texture2D(colortex0, texcoord).rgb;
-	color = mix(color, pow(color, vec3(0.85)), screenBrightness);
+	//color = mix(color, pow(color, vec3(0.85)), screenBrightness);
 	#ifdef MINIMAP
 	if (hideGUI == 0) {
 		vec2 lookdir = normalize(gbufferModelView[0].xz + vec2(0.01, 0.0));
