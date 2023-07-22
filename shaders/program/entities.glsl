@@ -11,7 +11,7 @@ uniform vec4 entityColor;
 //Program//
 void main() {
 	vec4 color = texture2D(texture, texcoord) * color * texture2D(lightmap, lmcoord);
-	color.rgb *= entityColor.rgb;
+	color.rgb *= 1 + entityColor.rgb;
 	/*DRAWBUFFERS:0*/
 	gl_FragData[0] = color;
 }
